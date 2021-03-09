@@ -11,7 +11,7 @@ def recibir():
             try:
                 mensaje = usuario.recv(1024).decode('ascii') #recibimos mensajes del servidor(q se comporta como usuario)
                 if mensaje == 'NICK':
-                    usuario.send(nickname.encode('ascii')) #le mandamos al servidor el nickname para su funcion recibir
+                    usuario.send(nickname.encode('ascii')) 
                     pass
                 else:
                     print(mensaje) #si no recibimos la palabra clave vemos que quiere el servidor
@@ -25,7 +25,7 @@ def escribir():
         mensaje = f'{nickname}: {input("")}' #esperamos input de los usuarios constantemente, o mandan mensaje o cierran el chat
         usuario.send(mensaje.encode('ascii')) #enviamos el mensaje al servidor (lo van a ver todos los usuarios por su funcion controlar)
 
-recibirThread = threading.Thread(target=recibir)
+recibirThread = threading.Thread(target=recibir) #usamos threads para ejecutar mas de una funcion a la vez
 recibirThread.start()
 
 escribirThread = threading.Thread(target=escribir)
