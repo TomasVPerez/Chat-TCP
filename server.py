@@ -21,10 +21,10 @@ def controlar(usuario):
             mensaje = usuario.recv(1024)
             enviarATodos(mensaje) #recibimos mensajes de los usuarios y los enviamos a todos los demas usuarios
         except: #si hay un error al recibir el mensaje o conexion con el usuario cortamos la conexion y lo removemos de la lista
-            indice = usuarios.index(usuario) #conseguimos su posicion en la lista
+            indice = usuarios.index(usuario) 
             usuarios.remove(usuario)
             usuario.close() 
-            nickname = nicknames[indice] #lo buscamos con ese indice en la lista de nicknames y lo borramos
+            nickname = nicknames[indice] 
             enviarATodos(f'{nickname} abandonó el chat'.encode('ascii'))
             nicknames.remove(nickname)
             break
@@ -32,7 +32,7 @@ def controlar(usuario):
 def recibir():
     while True:
         usuario, ip = server.accept() #acepta las conexiones de cualquier usuario
-        print(f'Conectado desde: {str(ip)}') #me dice desde donde se conectaron
+        print(f'Conectado desde: {str(ip)}') 
 
         usuario.send('NICK'.encode('ascii')) #le envio una palabra clave para esperar una respuesta especifica(su nick en este caso)
         nickname = usuario.recv(1024).decode('ascii') #recibo el nickname
@@ -48,7 +48,7 @@ def recibir():
 
     
 print("Esperando conexiones...")
-recibir() #corro el main
+recibir()
 
 
 
