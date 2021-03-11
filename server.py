@@ -2,7 +2,7 @@ import threading
 import socket
 
 ip = "127.0.0.1" #La ip que si solo es en casa se usa localhost
-puerto = 55555
+puerto = 44444
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((ip, puerto))
