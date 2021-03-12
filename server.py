@@ -6,7 +6,7 @@ puerto = 44444
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((ip, puerto))
-server.listen() #para que el server escuche conexiones
+server.listen() 
 
 usuarios = []
 nicknames = []
@@ -34,14 +34,14 @@ def recibir():
         usuario, ip = server.accept() #acepta las conexiones de cualquier usuario
         print(f'Conectado desde: {str(ip)}') 
 
-        usuario.send('NICK'.encode('ascii')) #le envio una palabra clave para esperar una respuesta especifica(su nick en este caso)
-        nickname = usuario.recv(1024).decode('ascii') #recibo el nickname
-        nicknames.append(nickname) #lo agrego a la lista de nicks
-        usuarios.append(usuario) #lo agrego a la lsta de usuarios
+        usuario.send('NICK'.encode('ascii')) 
+        nickname = usuario.recv(1024).decode('ascii')
+        nicknames.append(nickname)
+        usuarios.append(usuario) 
 
-        print(f'El nickname del usuario es {nickname}') #me muestra el nick q eligio
+        print(f'El nickname del usuario es {nickname}')
         enviarATodos(f'{nickname} se unio al chat'.encode('ascii')) 
-        usuario.send("Conectado al servidor".encode('ascii')) #le mando un mensaje a ese usuario
+        usuario.send("Conectado al servidor".encode('ascii'))
 
         thread = threading.Thread(target=controlar, args=(usuario,)) #inicio un thread porque necesito controlar muchos clientes/trafico a la vez
         thread.start()  
